@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Budget Tracker</title>
+</head>
+<body>
+    <h1>Budget Tracker</h1>
+
+    <h2>Add an Expense</h2>
+    <form action="/add" method="POST">
+        <input type="number" step="0.01" name="amount" placeholder="Amount" required>
+        <input type="text" name="category" placeholder="Category" required>
+        <input type="date" name="date" required>
+        <input type="text" name="note" placeholder="Note (optional)">
+        <button type="submit">Add Expense</button>
+    </form>
+
+    <h2>All Expenses</h2>
+    <ul>
+    {% for expense in expenses %}
+        <li>
+            {{ expense.date }} — {{ expense.category }} — ${{ expense.amount }} — {{ expense.note }}
+            <form action="/delete/{{ expense.id }}" method="POST" style="display:inline">
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+    {% endfor %}
+    </ul>
+</body>
+</html>
