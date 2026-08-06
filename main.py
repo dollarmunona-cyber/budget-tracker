@@ -18,7 +18,8 @@ with app.app_context():
 @app.route('/')
 def home():
     expenses = Expense.query.all()
-    return render_template('index.html', expenses=expenses)
+    total = sum(e.amount for e in expenses)
+    return render_template('index.html', expenses=expenses, total=total)
 
 @app.route('/add', methods=['POST'])
 def add_expense():
